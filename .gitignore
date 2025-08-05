@@ -1,0 +1,71 @@
+# Executables and binaries
+bin/
+*.exe
+*.out
+*.app
+
+# Object files
+*.o
+*.obj
+
+# Debug files
+*.dSYM/
+*.su
+*.idb
+*.pdb
+
+# Core dumps
+core
+core.*
+
+# Temporary files
+*.tmp
+*.temp
+*~
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Build directories
+build/
+dist/
+target/
+
+# Log files
+*.log
+
+# Backup files
+*.bak
+*.backup
+
+# Dependency directories
+node_modules/
+vendor/
+
+# Configuration files with sensitive data
+config.ini
+.env
+.env.local
+.env.*.local
+
+# Test coverage reports
+coverage/
+*.gcov
+*.gcda
+*.gcno
+
+# Profiling data
+gmon.out 
