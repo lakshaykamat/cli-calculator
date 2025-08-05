@@ -112,12 +112,27 @@ install: $(TARGET)
 	@echo "$(BOLD)$(BLUE)║                   INSTALLING                                ║$(RESET)"
 	@echo "$(BOLD)$(BLUE)╚══════════════════════════════════════════════════════════════╝$(RESET)"
 	@echo ""
-	@echo "$(YELLOW)📦 Installing calculator to system...$(RESET)"
-	@echo "$(BLUE)Command:$(RESET) sudo cp $(TARGET) /usr/local/bin/"
+	@echo "$(YELLOW)📦 Installing calculator as 'calc' command...$(RESET)"
+	@echo "$(BLUE)Command:$(RESET) sudo cp $(TARGET) /usr/local/bin/calc"
 	@echo ""
-	sudo cp $(TARGET) /usr/local/bin/
+	sudo cp $(TARGET) /usr/local/bin/calc
 	@echo ""
 	@echo "$(GREEN)✅ Install complete!$(RESET)"
+	@echo "$(GREEN)🚀 You can now run 'calc' from anywhere!$(RESET)"
+	@echo ""
+
+# Uninstall from system
+uninstall:
+	@echo "$(BOLD)$(RED)╔══════════════════════════════════════════════════════════════╗$(RESET)"
+	@echo "$(BOLD)$(RED)║                   UNINSTALLING                               ║$(RESET)"
+	@echo "$(BOLD)$(RED)╚══════════════════════════════════════════════════════════════╝$(RESET)"
+	@echo ""
+	@echo "$(YELLOW)🗑️  Removing 'calc' command from system...$(RESET)"
+	@echo "$(BLUE)Command:$(RESET) sudo rm -f /usr/local/bin/calc"
+	@echo ""
+	sudo rm -f /usr/local/bin/calc
+	@echo ""
+	@echo "$(GREEN)✅ Uninstall complete!$(RESET)"
 	@echo ""
 
 # Show help
@@ -131,7 +146,8 @@ help:
 	@echo "$(GREEN)  make$(RESET)        - Build the calculator"
 	@echo "$(GREEN)  make clean$(RESET)  - Remove build files"
 	@echo "$(GREEN)  make run$(RESET)    - Build and run"
-	@echo "$(GREEN)  make install$(RESET)- Install to system"
+	@echo "$(GREEN)  make install$(RESET)- Install as 'calc' command"
+	@echo "$(GREEN)  make uninstall$(RESET)- Remove 'calc' command"
 	@echo "$(GREEN)  make help$(RESET)   - Show this help"
 	@echo ""
 	@echo "$(BOLD)$(MAGENTA)🔧 BUILD PROCESS:$(RESET)"
@@ -146,8 +162,13 @@ help:
 	@echo "$(CYAN)include/$(RESET) - Header files (.h)"
 	@echo "$(CYAN)bin/$(RESET)     - Build output (gitignored)"
 	@echo ""
+	@echo "$(BOLD)$(GREEN)🚀 USAGE AFTER INSTALL:$(RESET)"
+	@echo ""
+	@echo "$(WHITE)Run from anywhere:$(RESET) $(CYAN)calc$(RESET)"
+	@echo "$(WHITE)Example:$(RESET) $(CYAN)echo '5 + 3' | calc$(RESET)"
+	@echo ""
 
 # =============================================================================
 # PHONY TARGETS
 # =============================================================================
-.PHONY: all clean run install help 
+.PHONY: all clean run install uninstall help 

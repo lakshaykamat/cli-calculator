@@ -18,6 +18,7 @@ A simple yet powerful command-line calculator written in C that supports basic a
 - **Input Validation**: Handles invalid inputs gracefully
 - **Organized Project Structure**: Clean separation of source, headers, and binaries
 - **Colorful Build System**: Beautiful, verbose Makefile with colors and emojis
+- **System Integration**: Install as `calc` command for global access
 
 ## 📋 Requirements
 
@@ -77,8 +78,15 @@ gcc bin/calculator.o bin/main.o -o bin/calculator -lm
 ## 📖 Usage
 
 ### Starting the Calculator
+
+#### From Project Directory
 ```bash
 ./bin/calculator
+```
+
+#### After System Installation
+```bash
+calc
 ```
 
 ### Input Format
@@ -168,7 +176,8 @@ The project features a stunning, verbose Makefile with:
 | `make` or `make all` | Build the calculator (default) |
 | `make clean` | Remove build files |
 | `make run` | Build and run the calculator |
-| `make install` | Install to system path |
+| `make install` | Install as `calc` command |
+| `make uninstall` | Remove `calc` command |
 | `make help` | Show beautiful help message |
 
 ### Build Process Example
@@ -209,11 +218,42 @@ make clean
 # Build and run
 make run
 
-# Install to system (requires sudo)
+# Install as 'calc' command (requires sudo)
 make install
+
+# Remove 'calc' command (requires sudo)
+make uninstall
 
 # Show beautiful help
 make help
+```
+
+## 🚀 System Installation
+
+### Install as Global Command
+```bash
+# Build and install
+make install
+```
+
+After installation, you can use `calc` from anywhere:
+```bash
+# Run interactively
+calc
+
+# Use with pipes
+echo "5 + 3" | calc
+echo "2 ^ 8" | calc
+
+# Test operations
+echo -e "10 - 4\nn" | calc
+echo -e "6 * 7\nn" | calc
+echo -e "15 / 3\nn" | calc
+```
+
+### Uninstall
+```bash
+make uninstall
 ```
 
 ## 🧪 Testing
@@ -234,6 +274,14 @@ echo -e "2 ^ -2\nn" | ./bin/calculator
 # Error handling
 echo -e "5 / 0\nn" | ./bin/calculator
 echo -e "invalid\nn" | ./bin/calculator
+```
+
+### Testing After Installation
+```bash
+# Test the 'calc' command
+echo -e "5 + 3\nn" | calc
+echo -e "2 ^ 3\nn" | calc
+echo -e "5 / 0\nn" | calc
 ```
 
 ## 🐛 Troubleshooting
@@ -260,6 +308,9 @@ echo -e "invalid\nn" | ./bin/calculator
 
 **6. Math Library Linking Error**
 - **Solution**: The Makefile automatically includes `-lm` flag for math library linking
+
+**7. "calc: command not found" after installation**
+- **Solution**: Try restarting your terminal or run `hash -r` to refresh command cache
 
 ## 🔮 Future Enhancements
 
