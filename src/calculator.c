@@ -25,6 +25,10 @@ double power(double base, double exponent) {
     return pow(base,exponent);
 }
 
+double modulo(double num1, double num2) {
+    return fmod(num1, num2);
+}
+
 /**
  * Performs the calculation based on the given operator and operands.
  *
@@ -54,14 +58,17 @@ bool calculator(double num1, char operator, double num2, double *result){
                 *result = divide(num1, num2);
                 return true;
             } else {
-                printf("\033[31mError: Division by zero is not allowed.\033[31m\n");
+                printf("\033[31mError: Division by zero is not allowed.\033[0m\n");
                 return false;
             }
         case '^':
             *result = power(num1, num2);
             return true;
+        case '%':
+            *result = modulo(num1, num2);
+            return true;
         default:
-            printf("\033[31mError: Unsupported operator '%c'.\033[31m\n", operator);
+            printf("\033[31mError: Unsupported operator '%c'.\033[0m\n", operator);
             return false;
     }
 }
