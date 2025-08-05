@@ -1,6 +1,6 @@
 # CLI Calculator
 
-A simple yet powerful command-line calculator written in C that supports basic arithmetic operations and advanced mathematical functions with a custom power implementation.
+A simple yet powerful command-line calculator written in C that supports basic arithmetic operations and advanced mathematical functions with a beautiful, colorful build system.
 
 ## 🚀 Features
 
@@ -12,17 +12,18 @@ A simple yet powerful command-line calculator written in C that supports basic a
 - **Power** (`^`): Raise first number to the power of second
 
 ### Advanced Features
-- **Custom Power Implementation**: No external math library dependencies
+- **Math Library Integration**: Uses standard `pow()` function for accurate power calculations
 - **Error Handling**: Robust input validation and error messages
 - **Interactive Interface**: User-friendly command-line interface
 - **Input Validation**: Handles invalid inputs gracefully
 - **Organized Project Structure**: Clean separation of source, headers, and binaries
+- **Colorful Build System**: Beautiful, verbose Makefile with colors and emojis
 
 ## 📋 Requirements
 
 - **Compiler**: GCC or any C99 compatible compiler
 - **Operating System**: Linux, macOS, or Windows (with appropriate compiler)
-- **Dependencies**: None (pure C implementation)
+- **Dependencies**: Math library (linked with `-lm`)
 - **Build Tool**: Make (optional, for easy building)
 
 ## 🛠️ Installation
@@ -67,9 +68,10 @@ Install MinGW or use WSL (Windows Subsystem for Linux)
 #### Manual Compilation
 If you prefer to compile manually:
 ```bash
+mkdir -p bin
 gcc -Wall -Wextra -std=c99 -I./include -c src/calculator.c -o bin/calculator.o
 gcc -Wall -Wextra -std=c99 -I./include -c src/main.c -o bin/main.o
-gcc bin/calculator.o bin/main.o -o bin/calculator
+gcc bin/calculator.o bin/main.o -o bin/calculator -lm
 ```
 
 ## 📖 Usage
@@ -118,12 +120,12 @@ Thank you for using the calculator!
 
 ## 🔧 Technical Details
 
-### Custom Power Implementation
-The calculator features a custom power function that handles:
+### Power Implementation
+The calculator uses the standard C math library `pow()` function for:
 - **Integer exponents** (positive and negative)
-- **Fractional exponents** using Taylor series approximation
+- **Fractional exponents** (square roots, cube roots, etc.)
 - **Special cases** (0^0, 1^x, etc.)
-- **Error handling** for invalid operations
+- **Accurate calculations** with proper error handling
 
 ### Error Handling
 The calculator includes comprehensive error handling for:
@@ -144,51 +146,77 @@ cli-calculator/
 │   ├── calculator    # Compiled executable
 │   ├── main.o        # Object files
 │   └── calculator.o  # Object files
-├── Makefile          # Build configuration
+├── Makefile          # Beautiful build configuration
 ├── .gitignore        # Git ignore rules
 └── README.md         # This file
 ```
 
 ## 🛠️ Build System
 
+### Beautiful Colorful Makefile
+The project features a stunning, verbose Makefile with:
+- **🎨 Color-coded output** for different stages
+- **📦 Visual boxes** around each build stage
+- **😊 Emojis** for better visual appeal
+- **📝 Detailed explanations** of what's happening
+- **🔍 Verbose commands** showing exact gcc calls
+
 ### Available Make Targets
 
 | Target | Description |
 |--------|-------------|
 | `make` or `make all` | Build the calculator (default) |
-| `make debug` | Build with debug information |
-| `make release` | Build optimized release version |
 | `make clean` | Remove build files |
-| `make install` | Install to system path |
-| `make uninstall` | Remove from system path |
 | `make run` | Build and run the calculator |
-| `make test` | Run automated tests |
-| `make help` | Show help message |
+| `make install` | Install to system path |
+| `make help` | Show beautiful help message |
+
+### Build Process Example
+```
+╔══════════════════════════════════════════════════════════════╗
+║                   COMPILING STAGE                          ║
+╚══════════════════════════════════════════════════════════════╝
+
+📝 Compiling source file: src/calculator.c
+📦 Creating object file: bin/calculator.o
+Command: gcc -Wall -Wextra -std=c99 -I./include -c src/calculator.c -o bin/calculator.o
+
+✅ Compilation successful!
+
+╔══════════════════════════════════════════════════════════════╗
+║                    LINKING STAGE                            ║
+╚══════════════════════════════════════════════════════════════╝
+
+🔗 Linking object files into executable...
+Command: gcc bin/calculator.o bin/main.o -o bin/calculator -lm
+
+╔══════════════════════════════════════════════════════════════╗
+║                   BUILD COMPLETE!                           ║
+╚══════════════════════════════════════════════════════════════╝
+
+✅ Calculator built successfully!
+🚀 You can run it with: ./bin/calculator
+```
 
 ### Examples
 ```bash
-# Build debug version
-make debug
-
-# Build optimized release version
-make release
+# Build the calculator
+make
 
 # Clean build files
 make clean
 
+# Build and run
+make run
+
 # Install to system (requires sudo)
 make install
 
-# Run tests
-make test
+# Show beautiful help
+make help
 ```
 
 ## 🧪 Testing
-
-### Using Make
-```bash
-make test
-```
 
 ### Manual Testing
 ```bash
@@ -230,6 +258,9 @@ echo -e "invalid\nn" | ./bin/calculator
 **5. Build Fails with Include Errors**
 - **Solution**: Ensure you're running make from the project root directory
 
+**6. Math Library Linking Error**
+- **Solution**: The Makefile automatically includes `-lm` flag for math library linking
+
 ## 🔮 Future Enhancements
 
 Potential improvements for future versions:
@@ -243,6 +274,8 @@ Potential improvements for future versions:
 - [ ] GUI version
 - [ ] Unit testing framework
 - [ ] Continuous integration
+- [ ] More advanced mathematical operations
+- [ ] Custom themes for the build system
 
 ## 📝 License
 
@@ -256,7 +289,7 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 1. Fork the repository
 2. Create a feature branch
 3. Make your changes
-4. Test thoroughly with `make test`
+4. Test thoroughly
 5. Submit a pull request
 
 ### Development Guidelines
@@ -264,6 +297,7 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 - Add tests for new features
 - Update documentation as needed
 - Use the provided Makefile for building
+- Maintain the beautiful build system aesthetics
 
 ## 📞 Support
 
@@ -274,4 +308,4 @@ If you encounter any issues or have questions:
 
 ---
 
-**Happy Calculating! 🧮**
+**Happy Calculating! 🧮✨**
