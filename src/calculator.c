@@ -54,14 +54,14 @@ bool calculator(double num1, char operator, double num2, double *result){
                 *result = divide(num1, num2);
                 return true;
             } else {
-                printf("Error: Division by zero is not allowed.\n");
+                printf("\033[31mError: Division by zero is not allowed.\033[31m\n");
                 return false;
             }
         case '^':
             *result = power(num1, num2);
             return true;
         default:
-            printf("Error: Unsupported operator '%c'.\n", operator);
+            printf("\033[31mError: Unsupported operator '%c'.\033[31m\n", operator);
             return false;
     }
 }
