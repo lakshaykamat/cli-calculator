@@ -1,44 +1,56 @@
 #include <stdio.h>
 #include <stdbool.h>
+#include <stdlib.h> 
 #include "../include/calculator.h"
 
 /**
  * The main entry point of the calculator program.
  *
- * Reads user input expressions, calculates results,
- * and asks the user if they want to perform more calculations.
+ * Accepts command-line arguments in the format: program num1 operator num2
+ * Example: ./calculator 5 + 3
  *
- * @return Exit status code (0 on success).
+ * @param argc Number of command-line arguments
+ * @param argv Array of command-line argument strings
+ * @return Exit status code (0 on success, 1 on error)
  */
-int main(){
-    double num1, num2, result;
-    char operator, choice;
+int main(int argc, char *argv[]) {
+    // Check if correct number of arguments provided
+    if (argc != 4) {
+        printf("Usage: %s <number1> <operator> <number2>\n", argv[0]);
+        printf("Example: %s 5 + 3\n", argv[0]);
+        printf("Supported operators: +, -, *, /, ^\n");
+        return 1;
+    }
 
-    printf("\033[36m=== Simple CLI Calculator ===\033[36m\n");
+    // Convert first argument to double
+    char *end1;
+    double num1 = strtod(argv[1], &end1);
+    if (*end1 != '\0') {
+        printf("Error: Invalid number '%s'\n", argv[1]);
+        return 1;
+    }
 
-    do {
-        printf("\033[33mEnter an expression (e.g., 5 + 2): \033[33m");
-        if (scanf("%lf %c %lf", &num1, &operator, &num2) != 3){
-            printf("\033[31mInvalid input! Please enter two numbers and an operator.033[31m\n");
+    // Read operator character
+    char operator = argv[2][0];
+    if (argv[2][1] != '\0') {
+        printf("Error: Invalid operator '%s'. Use single character: +, -, *, /, ^\n", argv[2]);
+        return 1;
+    }
 
-            printf("\033[0m\nDo you want to try again? (y/n): \033[0m\n");
-            if (scanf(" %c", &choice) != 1 || (choice != 'y' && choice != 'Y')) {
-                printf("\033[34mExiting...\033[0m\n");
-                break;
-            }
-            continue;
-        }
+    // Convert third argument to double
+    char *end2;
+    double num2 = strtod(argv[3], &end2);
+    if (*end2 != '\0') {
+        printf("Error: Invalid number '%s'\n", argv[3]);
+        return 1;
+    }
 
-        if (calculator(num1, operator, num2, &result)){
-            printf("\033[32m%lf %c %lf = \033[32m",num1,operator,num2);
-            printf("\033[32m%.2lf\033[32m\n",result);
-        }
-
-        printf("\33[36mDo you want to perform another calculation? (y/n): \033[35m");
-        if (scanf(" %c", &choice) != 1 || (choice != 'y' && choice != 'Y')) {
-            break;
-        }
-
-    } while (true);
-    return 0;
+    // Perform calculation
+    double result;
+    if (calculator(num1, operator, num2, &result)) {
+        printf("\033[32m%.2lf %c %.2lf = %.2lf\033[32m\n", num1, operator, num2, result);
+        return 0;
+    } else {
+        return 1;
+    }
 }
